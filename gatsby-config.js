@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: "My super blog",
+    title: "My blog",
     description: "Gatsby blog with Strapi",
-    author: "Strapi team",
+    author: "My company",
   },
   plugins: [
     "gatsby-plugin-react-helmet",
@@ -16,7 +16,9 @@ module.exports = {
     {
       resolve: "gatsby-source-strapi",
       options: {
-        apiURL: "http://localhost:1337",
+        apiURL: process.env.DEPLOY_URL
+          ? "https://strapi-gatsby-postgres-plee.herokuapp.com/"
+          : "http://localhost:1337",
         contentTypes: [
           // List of the Content Types you want to be able to request from Gatsby.
           "article",
