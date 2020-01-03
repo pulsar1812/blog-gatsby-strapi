@@ -1,5 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import ReactMarkdown from "react-markdown"
+
 import Layout from "../components/layout"
 
 const UserTemplate = ({ data }) => (
@@ -11,7 +13,14 @@ const UserTemplate = ({ data }) => (
           <h2>
             <Link to={`/Article_${article.id}`}>{article.title}</Link>
           </h2>
-          <p>{article.content}</p>
+          <ReactMarkdown
+            source={article.content}
+            transformImageUri={uri =>
+              uri.startsWith("http")
+                ? uri
+                : `${process.env.IMAGE_BASE_URL}${uri}`
+            }
+          />
         </li>
       ))}
     </ul>
